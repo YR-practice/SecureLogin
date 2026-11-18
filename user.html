@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Користувач</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <strong>Кабінет користувача</strong>
+  <div><span class="who" id="who"></span> <button id="logout">Вийти</button></div>
+</header>
+<main>
+  <div class="panel">
+    <h1 id="hello">Вітаємо!</h1>
+    <p class="sub">Ваші дані збережено у зашифрованому вигляді.</p>
+  </div>
+
+  <div class="panel">
+    <h1>Симетричне шифрування</h1>
+    <p>У <b>симетричних</b> алгоритмах для шифрування та дешифрування використовується <b>один і той самий секретний ключ</b>. Відправник і одержувач мають заздалегідь узгодити ключ і зберігати його в таємниці.</p>
+
+    <div class="scheme">
+      <div>Відкритий текст <b>M</b></div><div class="arrow">→</div>
+      <div>Шифрування <b>E<sub>K</sub></b></div><div class="arrow">→</div>
+      <div>Шифротекст <b>C</b></div><div class="arrow">→</div>
+      <div>Дешифрування <b>D<sub>K</sub></b></div><div class="arrow">→</div>
+      <div>Відкритий текст <b>M</b></div>
+    </div>
+    <div class="formula">C = E<sub>K</sub>(M) &nbsp;&nbsp;&nbsp; M = D<sub>K</sub>(C)</div>
+
+    <h2>Стійкість залежить від</h2>
+    <ul>
+      <li>надійності алгоритму (неможливо розшифрувати без ключа, аналізуючи лише шифротекст);</li>
+      <li>секретності ключа, а не алгоритму (принцип Керкгоффса);</li>
+      <li>неможливості обчислити ключ, навіть знаючи багато пар «відкритий текст — шифротекст».</li>
+    </ul>
+
+    <h2>Відомі алгоритми</h2>
+    <ul>
+      <li><b>AES</b> — сучасний стандарт (блок 128 біт, ключ 128/192/256 біт);</li>
+      <li><b>DES / 3DES</b> — застарілі, DES вразливий через короткий ключ (56 біт);</li>
+      <li><b>ChaCha20</b>, <b>Blowfish</b>, <b>ГОСТ 28147-89 / «Калина»</b>.</li>
+    </ul>
+
+    <h2>Недолік</h2>
+    <p>Проблема розподілу ключів: якщо ключ перехоплено, зловмисник отримає доступ до всієї зашифрованої інформації. Тому на практиці симетричне шифрування поєднують з асиметричним (наприклад, у TLS/HTTPS).</p>
+
+    <h2>У цьому застосунку</h2>
+    <p>Дані користувачів шифруються алгоритмом <code>AES-256-GCM</code> (Web Crypto API) із ключем, виведеним через <code>PBKDF2</code>, і записуються в <code>localStorage</code>. Перегляньте їх у DevTools → Application → Local Storage.</p>
+  </div>
+
+  <div class="panel">
+    <h2 style="margin-top:0">Ваш профіль</h2>
+    <div class="tbl-wrap"><table><tbody id="profile"></tbody></table></div>
+  </div>
+</main>
+<script src="js/crypto.js"></script>
+<script src="js/store.js"></script>
+<script src="js/user.js"></script>
+</body>
+</html>

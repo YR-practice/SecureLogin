@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Адміністратор</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <strong>Панель адміністратора</strong>
+  <div><span class="who" id="who"></span> <button id="logout">Вийти</button></div>
+</header>
+<main>
+  <div class="panel">
+    <h1>Зареєстровані користувачі</h1>
+    <p class="sub">Дані зберігаються в Local Storage у зашифрованому вигляді (AES-256-GCM) і дешифруються для відображення.</p>
+    <div class="toolbar">
+      <button id="togglePass">Показати паролі</button>
+      <button id="toggleCipher">Показати шифротекст</button>
+      <button id="refresh">Оновити</button>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>№</th><th>ПІБ</th><th>Email</th><th>Логін</th><th>Пароль</th><th>Дата реєстрації</th>
+              <th class="cipherCol hidden">Шифротекст пароля</th><th></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="js/crypto.js"></script>
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
